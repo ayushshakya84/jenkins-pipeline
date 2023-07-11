@@ -7,8 +7,20 @@ pipeline {
   }
   stages {
     stage('scm') {
-      steps {
-        git 'https://github.com/ayushshakya84/jenkins-pipeline.git'
+      parallel {
+        stage('scm') {
+          steps {
+            git 'https://github.com/ayushshakya84/jenkins-pipeline.git'
+            git(url: 'https://github.com/ayushshakya84/jenkins-pipeline.git', branch: 'master')
+          }
+        }
+
+        stage('') {
+          steps {
+            sleep 2
+          }
+        }
+
       }
     }
 
